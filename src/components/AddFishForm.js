@@ -51,7 +51,7 @@ class AddFishForm extends React.Component {
 					<input type="text" name="image" value={this.state.image} placeholder="Fish Image" onChange={this.handleChange} />
 					<button type="submit">Add Fish +</button>
 				</form>
-			</React.Fragment>	
+			</React.Fragment>
 		);
 	}
 }

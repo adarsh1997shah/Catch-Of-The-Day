@@ -22,6 +22,7 @@ class Order extends React.Component {
 	}
 
 
+
 	// Render list of order.
 	renderOrder = ( order ) => {
 		const fish = this.props.fishes[order];
@@ -37,7 +38,10 @@ class Order extends React.Component {
 			return <li key={order}>Sorry {fish ? fish.name + 'has been sold out' : 'fish is no longer availble'}</li>
 		}
 
-		return <li key={order}>{count}lbs {fish.name} {formatPrice( fish.price * count )}</li>
+		return <li key={order}>
+					{count}lbs {fish.name} {formatPrice( fish.price * count )}
+					<button onClick={ () => this.props.deleteOrder( order ) } >&times;</button>
+				</li>
 	}
 
 

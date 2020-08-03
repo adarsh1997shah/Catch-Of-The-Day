@@ -21,7 +21,7 @@ class App extends React.Component {
 
 
 	componentDidMount(){
-		
+
 		// Getting localstorage item.
 		const localStorageRef = localStorage.getItem( this.props.match.params.store );
 
@@ -37,8 +37,7 @@ class App extends React.Component {
 	}
 
 
-	componentDidUpdate( prevProps, prevState ) {
-		console.log( this.state.orders );
+	componentDidUpdate() {
 		localStorage.setItem( this.props.match.params.store, JSON.stringify( this.state.orders ) );
 	}
 
@@ -53,6 +52,26 @@ class App extends React.Component {
 
 		const { fishes } = this.state;
 		fishes[`fish${Object.keys(fishes).length + 1}`] = fish;
+
+		this.setState( { fishes } );
+	}
+
+
+	// Edit fish from the enventory.
+	editFish = ( fish, property, value  ) => {
+
+		const { fishes } = this.state;
+		fishes[fish][property] = value;
+
+		this.setState( { fishes } );
+	}
+
+
+	// Delete fish from the enventory.
+	deleteFish = ( fish ) => {
+
+		const { fishes } = this.state;
+		fishes[fish] = null;
 
 		this.setState( { fishes } );
 	}
@@ -79,6 +98,16 @@ class App extends React.Component {
 	}
 
 
+	// Delete order.
+	deleteOrder = ( order ) => {
+
+		const { orders } = this.state;
+		delete orders[order];
+
+		this.setState( { orders } );
+	}
+
+
 	render() {
 		return(
 			<React.Fragment>
@@ -95,8 +124,19 @@ class App extends React.Component {
 						</ul>
 					</div>
 
-					<Order fishes={this.state.fishes} orders={this.state.orders} />
-					<Inventory addFish={this.addFish} loadSampleFish={this.loadSampleFish} />
+					<Order 
+						fishes={this.state.fishes}
+						orders={this.state.orders}
+						deleteOrder={this.deleteOrder}
+					/>
+					
+					<Inventory 
+						addFish={this.addFish}
+						loadSampleFish={this.loadSampleFish}
+						fishes={this.state.fishes}
+						editFish={this.editFish}
+						deleteFish={this.deleteFish}	
+					/>
 				</div>
 			</React.Fragment>	
 		);
