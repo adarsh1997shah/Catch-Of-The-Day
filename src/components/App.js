@@ -21,11 +21,25 @@ class App extends React.Component {
 
 
 	componentDidMount(){
+		
+		// Getting localstorage item.
+		const localStorageRef = localStorage.getItem( this.props.match.params.store );
+
+		// If stored in local storage.
+		if( localStorageRef ) {
+			this.setState( { orders: JSON.parse(localStorageRef) } );
+		}
+
 		this.ref = base.syncState(`${this.props.match.params.store}/fishes`, {
 		  context: this,
 		  state: 'fishes',
-		  asArray: true
 		});
+	}
+
+
+	componentDidUpdate( prevProps, prevState ) {
+		console.log( this.state.orders );
+		localStorage.setItem( this.props.match.params.store, JSON.stringify( this.state.orders ) );
 	}
 
 

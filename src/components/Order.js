@@ -30,6 +30,9 @@ class Order extends React.Component {
 		// If there is fish with that index and is available;
 		const isavailable = fish && fish.status === 'available'? true : false;
 
+		// Make sure the fish is available.
+		if( !fish ) return null;
+
 		if( !isavailable ) {
 			return <li key={order}>Sorry {fish ? fish.name + 'has been sold out' : 'fish is no longer availble'}</li>
 		}
