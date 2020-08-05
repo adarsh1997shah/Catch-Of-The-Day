@@ -15,7 +15,10 @@ class Fish extends React.Component {
 
 		return(
 			<React.Fragment>
-				<li className="menu-fish">
+				<li
+					className="menu-fish"
+					style={{ 'transition-delay': `${(parseInt(this.props.transitionIndex)+1) * 150}ms` }}
+				>
 					<img src={image} alt={name} />
 					<h3 className="fish-name">
 						{ name }

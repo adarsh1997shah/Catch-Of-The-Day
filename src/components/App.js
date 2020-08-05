@@ -5,6 +5,7 @@ import Inventory from './Inventory';
 import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
 import { base } from '../base';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
 
@@ -33,7 +34,7 @@ class App extends React.Component {
 		this.ref = base.syncState(`${this.props.match.params.store}/fishes`, {
 		  context: this,
 		  state: 'fishes',
-		});
+		})
 	}
 
 
@@ -79,6 +80,7 @@ class App extends React.Component {
 
 	// Loading sample fishes.
 	loadSampleFish = () => {
+
 		this.setState( { fishes: sampleFishes } );
 	}
 
@@ -107,7 +109,6 @@ class App extends React.Component {
 		this.setState( { orders } );
 	}
 
-
 	render() {
 		return(
 			<React.Fragment>
@@ -115,13 +116,24 @@ class App extends React.Component {
 					<div className="menu">
 						<Header tagline="Fresh Seafood Market" />
 
-						<ul className="fishes">
+						
+						<TransitionGroup className="fishes" component="ul">
 						{
-							Object.keys( this.state.fishes ).map( (fish) => {
-								return <Fish key={fish} index={fish} details={this.state.fishes[fish]} addOrder={this.addOrder} />
+							Object.keys( this.state.fishes ).map( (fish , index) => {
+								return (
+									<CSSTransition key={fish} classNames="fish" timeout={300}>
+									<Fish
+										key={fish}
+										index={fish}
+										transitionIndex={index}
+										details={this.state.fishes[fish]}
+										addOrder={this.addOrder}
+									/>
+									</CSSTransition>
+								)
 							} )
 						}
-						</ul>
+						</TransitionGroup>
 					</div>
 
 					<Order 
