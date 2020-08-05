@@ -4,12 +4,18 @@ import Order from './Order';
 import Inventory from './Inventory';
 import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
-import { base } from '../base';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import PropTypes from 'prop-types';
+import { base } from '../base';
 
 
 
 class App extends React.Component {
+
+	static propTypes = {
+		match: PropTypes.object
+	}
+
 
 	constructor() {
 		super();

@@ -1,6 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 class EditFishForm extends React.Component {
+
+	static propTypes = {
+		editFish: PropTypes.func,
+		index: PropTypes.string,
+		details: PropTypes.shape( {
+			image: PropTypes.string,
+			desc: PropTypes.string,
+			name: PropTypes.string,
+			price: PropTypes.number,
+			status: PropTypes.string
+		} )
+	}
+
+
 
 	// handle change in any sample fish form and reflect everywhere.
 	handleChange = ( e ) => {

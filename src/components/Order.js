@@ -1,8 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { formatPrice } from '../helpers';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+
+
 class Order extends React.Component {
+
+	static propTypes = {
+		fishes: PropTypes.shape( {
+			image: PropTypes.string,
+			desc: PropTypes.string,
+			name: PropTypes.string,
+			price: PropTypes.number,
+			status: PropTypes.string
+		} ),
+		orders: PropTypes.object,
+		deleteOrder: PropTypes.func
+	}
+
 
 	// To calculate the total price.
 	calcTotalPrice = () => {

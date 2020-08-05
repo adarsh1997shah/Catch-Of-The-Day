@@ -1,7 +1,23 @@
 import React from 'react';
 import { formatPrice } from '../helpers';
+import PropTypes from 'prop-types';
+
 
 class Fish extends React.Component {
+
+	static propTypes = {
+		details: PropTypes.shape( {
+			image: PropTypes.string,
+			desc: PropTypes.string,
+			name: PropTypes.string,
+			price: PropTypes.number,
+			status: PropTypes.string
+		} ),
+		addOrder: PropTypes.func,
+		index: PropTypes.string,
+		transitionIndex: PropTypes.number
+	}
+
 
 	// handle the fish to order.
 	handleClick = () => {
@@ -17,7 +33,7 @@ class Fish extends React.Component {
 			<React.Fragment>
 				<li
 					className="menu-fish"
-					style={{ 'transition-delay': `${(parseInt(this.props.transitionIndex)+1) * 150}ms` }}
+					style={{ 'transitionDelay': `${(parseInt(this.props.transitionIndex)+1) * 150}ms` }}
 				>
 					<img src={image} alt={name} />
 					<h3 className="fish-name">
