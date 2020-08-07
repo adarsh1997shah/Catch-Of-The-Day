@@ -13,7 +13,8 @@ class EditFishForm extends React.Component {
 			name: PropTypes.string,
 			price: PropTypes.number,
 			status: PropTypes.string
-		} )
+		} ),
+		deleteFish: PropTypes.func,
 	}
 
 

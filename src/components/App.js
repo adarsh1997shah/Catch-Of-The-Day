@@ -38,8 +38,8 @@ class App extends React.Component {
 		}
 
 		this.ref = base.syncState(`${this.props.match.params.store}/fishes`, {
-		  context: this,
-		  state: 'fishes',
+			context: this,
+			state: 'fishes',
 		})
 	}
 
@@ -153,7 +153,8 @@ class App extends React.Component {
 						loadSampleFish={this.loadSampleFish}
 						fishes={this.state.fishes}
 						editFish={this.editFish}
-						deleteFish={this.deleteFish}	
+						deleteFish={this.deleteFish}
+						storeId={this.props.match.params.store}
 					/>
 				</div>
 			</React.Fragment>	
