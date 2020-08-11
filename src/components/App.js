@@ -12,6 +12,7 @@ import { base } from '../base';
 
 class App extends React.Component {
 
+
 	static propTypes = {
 		match: PropTypes.object
 	}
@@ -22,12 +23,14 @@ class App extends React.Component {
 
 		this.state = {
 			fishes: {},
-			orders: {}
+			orders: {},
 		}
 	}
 
 
 	componentDidMount(){
+
+		this.mounted = true;
 
 		// Getting localstorage item.
 		const localStorageRef = localStorage.getItem( this.props.match.params.store );
@@ -37,11 +40,14 @@ class App extends React.Component {
 			this.setState( { orders: JSON.parse(localStorageRef) } );
 		}
 
-		this.ref = base.syncState(`${this.props.match.params.store}/fishes`, {
-			context: this,
-			state: 'fishes',
-		})
+		if( this.mounted ) {
+			this.ref = base.syncState(`${this.props.match.params.store}/fishes`, {
+				context: this,
+				state: 'fishes',
+			})
+		}
 	}
+
 
 
 	componentDidUpdate() {
@@ -49,8 +55,10 @@ class App extends React.Component {
 	}
 
 
+
 	componentWillUnmount() {
-		base.removeBinding( this.ref );
+			this.mounted = false;
+			base.removeBinding( this.ref );
 	}
 
 
