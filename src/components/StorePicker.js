@@ -40,16 +40,11 @@ class StorePicker extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-			{
-				this.state.isLoading?
-				''
-				:
 				<form className="store-selector" onSubmit={ this.goToStore } >
 					<h2>Please Enter A Store</h2>
 					<input type="text" required placeholder="Store Name" onChange={ this.handleChange} value={ this.state.storeName } />
 					<button type="submit">Visit Store &rarr;</button>
 				</form>
-			}
 			</React.Fragment>
 		);
 	}
