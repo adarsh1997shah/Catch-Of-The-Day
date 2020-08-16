@@ -36,7 +36,6 @@ class Inventory extends React.Component {
 			uid: null,
 			owner: null,
 			name: null,
-			current: null,
 		}
 	}
 
@@ -47,10 +46,6 @@ class Inventory extends React.Component {
 			if( user ) {
 				//firebase.auth().signOut()
 				this.authHandler( { user } );
-
-				base.post( 'CurrentUrl', {
-					data: this.props.storeId,
-				} );
 			}else {
 				this.setState( { isLoading: false } );
 			}
@@ -87,7 +82,7 @@ class Inventory extends React.Component {
 			this.setState( {
 				isLoading: false,
 				uid: response.user.uid,
-				owner: data.owner? data.owner.uid : '' || response.user.uid,
+				owner: data.owner? data.owner.uid : response.user.uid,
 				name: response.user.displayName,
 			} );
 
@@ -116,11 +111,7 @@ class Inventory extends React.Component {
 			.then( () => {
 				console.log( 'sign out successfull' );
 
-				this.setState( { uid: null, current: null } );
-
-				base.post( 'CurrentUrl', {
-					data: '',
-				} );
+				this.setState( { uid: null } );
 			} )
 			.catch( ( err ) => {
 				console.log( 'Opps problem with signing out', err.message );
